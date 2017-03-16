@@ -9,7 +9,7 @@ fi
 # get genome index
 if [ $1 == "mm10" ]
 then
-  REF=/home/rcf-40/mengzhou/panfs/genome/walt_indices/mm10/mm10.dbindex
+  REF=/home/rcf-40/mengzhou/panfs/genome/mapping_index/walt/mm10/mm10.dbindex
   #REF=/home/rcf-40/mengzhou/panfs/genome/walt_indices/seed3/mm10/mm10.dbindex
 #elif [ $1 == "hg19" ]
 #then
@@ -17,7 +17,7 @@ then
 #  #REF=/home/rcf-40/mengzhou/panfs/genome/walt_indices/seed3/hg19/hg19.dbindex
 elif [ $1 == "hg38" ]
 then
-  REF=/home/rcf-40/mengzhou/panfs/genome/walt_indices/hg38/hg38.dbindex
+  REF=/home/rcf-40/mengzhou/panfs/genome/mapping_index/walt/hg38/hg38.dbindex
 else
   echo "$1 is not a supported genome index for WALT!"
   exit

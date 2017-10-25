@@ -17,7 +17,7 @@ then
 #PBS -e ${PWD}
 #PBS -o ${PWD}
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=12:00:00
+#PBS -l walltime=100:00:00
 #PBS -l mem=4000mb
 #PBS -l pmem=4000mb
 #PBS -l vmem=4000mb
@@ -40,7 +40,7 @@ else
 #PBS -e ${PWD}
 #PBS -o ${PWD}
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=12:00:00
+#PBS -l walltime=100:00:00
 #PBS -l mem=4000mb
 #PBS -l pmem=4000mb
 #PBS -l vmem=4000mb

@@ -37,7 +37,7 @@ export PATH=$PATH
 WD=${PWD}
 cd \$WD
 
-$WALT -t 16 -i $REF -r $2 -o ${NAME}.mr
+$WALT -t 16 -N 100000 -i $REF -r $2 -o ${NAME}.mr
 " > qsub_walt_${NAME}.sh
 else
   # pair-end
@@ -55,6 +55,6 @@ export PATH=$PATH
 WD=${PWD}
 cd \$WD
 
-$WALT -t 16 -N 500000 -i $REF -1 $2 -2 $3 -o ${NAME}.mr
+$WALT -t 16 -N 100000 -i $REF -1 $2 -2 $3 -o ${NAME}.mr
 " > qsub_walt_${NAME}.sh
 fi

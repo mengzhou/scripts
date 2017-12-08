@@ -29,8 +29,11 @@ class mapstats:
     self._compute()
 
   def __str__(self):
+    ostr = ""
     for i in self.d.keys():
-      sys.stdout.write("\t".join(i, str(self.d[i]))+"\n")
+      ostr += "\t".join((i, str(self.d[i])))+"\n"
+
+    return ostr
 
 class stats_se(mapstats):
   def _pattern_list(self):
@@ -62,7 +65,7 @@ class stats_pe(mapstats):
     self.patterns = {"total_pairs":"TOTAL NUMBER OF READ PAIRS: (\d+)",
         "uniq_pairs":"UNIQUELY MAPPED READ PAIRS: (\d+)",
         "ambi_pairs":"AMBIGUOUS MAPPED READ PAIRS: (\d+)",
-        "unmapped_pairs":"UNMAPPED READ PAIRS: (\d+)",
+        "unmapped_pairs":"UNMAPPED READS PAIRS: (\d+)",
         "uniq_mate1":"UNIQUELY MAPPED READS IN MATE_1: (\d+)",
         "ambi_mate1":"AMBIGUOUS MAPPED READS IN MATE_1: (\d+)",
         "unmapped_mate1":"UNMAPPED READS IN MATE_1: (\d+)",

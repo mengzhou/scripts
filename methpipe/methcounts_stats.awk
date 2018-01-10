@@ -1,4 +1,4 @@
-#/usr/bin/env awk
+#/bin/awk
 BEGIN {
   sites=0;
   sites_covered=0;

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-TRIM=/home/rcf-40/dolzhenk/panasas/trim_galore/trim_galore
-CUTADAPT=/home/rcf-40/mengzhou/bin/cutadapt-1.3/bin/cutadapt
+TRIM=/home/rcf-40/mengzhou/panfs/tools/trim_galore.0.4.1/trim_galore
+CUTADAPT=/home/rcf-40/mengzhou/panfs/tools/cutadapt-1.3/bin/cutadapt
 if [ $# -lt 1 ]
 then
   echo "Usage: $0 <input_fastq_1> [input_fastq_2]"

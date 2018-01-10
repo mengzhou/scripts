@@ -6,17 +6,9 @@ then
   exit
 fi
 # get genome index
-if [ $1 == "mm10" ]
+REF=/home/rcf-40/mengzhou/panfs/genome/mapping_index/walt/${1}/${1}.dbindex
+if [ ! -e $REF ]
 then
-  REF=/home/rcf-40/mengzhou/panfs/genome/mapping_index/walt/mm10/mm10.dbindex
-#elif [ $1 == "hg19" ]
-#then
-#  REF=/home/rcf-40/mengzhou/panfs/genome/walt_indices/hg19/hg19.dbindex
-#  #REF=/home/rcf-40/mengzhou/panfs/genome/walt_indices/seed3/hg19/hg19.dbindex
-elif [ $1 == "hg38" ]
-then
-  REF=/home/rcf-40/mengzhou/panfs/genome/mapping_index/walt/hg38/hg38.dbindex
-else
   echo "$1 is not a supported genome index for WALT!"
   exit
 fi
@@ -49,7 +41,7 @@ else
 #PBS -o ${PWD}
 #PBS -l nodes=1:ppn=16
 #PBS -l walltime=100:00:00
-#PBS -l mem=60000mb
+#PBS -l mem=50000mb
 export PATH=$PATH
 
 WD=${PWD}

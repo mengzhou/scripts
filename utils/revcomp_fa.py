@@ -7,8 +7,7 @@ import sys
 def revc( seq ):
   comp = {"A":"T","C":"G","G":"C","T":"A","a":"t","c":"g","g":"c","t":"a",\
       "N":"N","n":"n"}
-  rev_seq = [comp[seq[i]] for i in xrange(len(seq)-1,-1,-1)]
-  return "".join(rev_seq)
+  return "".join([comp[nt] for nt in seq[::-1]])
 
 def fold(string, width = 50):
   return [string[i:i+width]+"\n" for i in range(0,len(string),width)]

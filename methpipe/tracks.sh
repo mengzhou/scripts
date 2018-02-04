@@ -27,14 +27,14 @@ then
       if [ ! -e $METH.bw ]
       then
         echo "Generating $METH.bw..."
-        awk -F "[\t,:]+" 'BEGIN{OFS="\t"}$5>0{print $1, $2, $2+1, $6}' ${METH} > temp$$
+        awk -F "[\t,:]+" 'BEGIN{OFS="\t"}$5>0{print $1,$2,$2+1,$6}' ${METH} > temp$$
         bedGraphToBigWig temp$$ ${GENOME} ${METH}.bw
       fi
 
       if [ ! -e $NAME.read.bw ]
       then
         echo "Generating $NAME.read.bw..."
-        awk -F "[\t,:]+" 'BEGIN{OFS="\t"}$5>0{print $1, $2, $2+1, $5}' ${METH} > temp$$
+        awk -F "[\t,:]+" 'BEGIN{OFS="\t"}$5>0{print $1,$2,$2+1,$5}' ${METH} > temp$$
         bedGraphToBigWig temp$$ ${GENOME} ${NAME}.read.bw
       fi
 

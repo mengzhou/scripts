@@ -1,47 +1,35 @@
 #!/usr/bin/awk
+# assumes the new methcounts format
+# works only for fast-liftover with -p
 BEGIN {
-  OFS="\t";
-}
-function output(chr, pos, strand, seq, meth, t) {
-  if (strand == "-") {
-    strand = "+";
-    pos--;
-  }
-  print chr, pos, strand, seq, meth, t;
+  OFS = "\t";
+  prev_chr = "";
+  prev_start = "";
+  prev_strand = "";
+  prev_context = "";
+  prev_meth = 0;
+  prev_coverage = 0;
 }
 {
-  if ($3=="-") {
-    $3 = "+";
-    $2 = $2-1;
-  }
-  if (NR == 1) {
-    chr = $1;
-    pos = $2;
-    strand = $3;
-    seq = $4;
-    t = $6;
-    m = $5 * $6;
+  if ($1==prev_chr && $2==prev_start && $3==prev_strand) {
+    prev_coverage += $6;
+    prev_meth += int($5*$6+0.5);
   }
   else {
-    if ($1 == chr && $2 == pos) {
-      t += $6;
-      m += $5 * $6;
-    }
-    else {
-      if (t == 0) meth = 0.0;
-      else meth = m / t;
-      output(chr,pos,strand,seq,meth,t);
-      chr = $1;
-      pos = $2;
-      strand = $3;
-      seq = $4;
-      t = $6;
-      m = $5 * $6;
-    }
+    if(prev_coverage ==0) meth = 0;
+    else meth = prev_meth/prev_coverage;
+    if (NR>1)
+      print prev_chr, prev_start, prev_strand, prev_context, meth, prev_coverage;
+    prev_chr = $1;
+    prev_start = $2;
+    prev_strand = $3;
+    prev_context = $4;
+    prev_meth = int($5*$6+0.5);
+    prev_coverage = $6;
   }
 }
 END {
-  if (t == 0) meth = 0.0;
-  else meth = m / t;
-  output(chr,pos,strand,seq,meth,t);
+  if(prev_coverage ==0) meth = 0;
+  else meth = prev_meth/prev_coverage;
+  print prev_chr, prev_start, prev_strand, prev_context, meth, prev_coverage;
 }

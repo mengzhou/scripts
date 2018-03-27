@@ -16,37 +16,39 @@ fi
 if [ $# == 2 ]
 then
   NAME=${2%%_trimmed*}
-  echo "#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N walt_${NAME}
-#PBS -e ${PWD}
-#PBS -o ${PWD}
-#PBS -l nodes=1:ppn=16
-#PBS -l walltime=100:00:00
-#PBS -l mem=48000mb
+  echo "#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J walt_${NAME}
+#SBATCH -e ${PWD}/%x.e%j
+#SBATCH -o ${PWD}/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=200:00:00
+#SBATCH --mem=50G
 export PATH=$PATH
 
 WD=${PWD}
 cd \$WD
 
-$WALT -t 16 -N 100000 -i $REF -r $2 -o ${NAME}.mr
+$WALT -t 16 -N 5000000 -i $REF -r $2 -o ${NAME}.mr
 " > qsub_walt_${NAME}.sh
 else
   # pair-end
   NAME=${2%%_1_val_1.*}
-  echo "#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N walt_${NAME}
-#PBS -e ${PWD}
-#PBS -o ${PWD}
-#PBS -l nodes=1:ppn=16
-#PBS -l walltime=100:00:00
-#PBS -l mem=50000mb
+  echo "#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J walt_${NAME}
+#SBATCH -e ${PWD}/%x.e%j
+#SBATCH -o ${PWD}/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=200:00:00
+#SBATCH --mem=50G
 export PATH=$PATH
 
 WD=${PWD}
 cd \$WD
 
-$WALT -t 16 -N 100000 -i $REF -1 $2 -2 $3 -o ${NAME}.mr
+$WALT -t 16 -N 5000000 -i $REF -1 $2 -2 $3 -o ${NAME}.mr
 " > qsub_walt_${NAME}.sh
 fi

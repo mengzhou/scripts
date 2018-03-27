@@ -4,19 +4,18 @@ then
   exit
 fi
 NAME=${2%.*}
-echo "#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N pipe_${NAME}
-#PBS -e $PWD
-#PBS -o $PWD
-#PBS -l nodes=1:ppn=1
-#PBS -l walltime=100:00:00
-#PBS -l mem=16000mb
-#PBS -l pmem=16000mb
-#PBS -l vmem=16000mb
-
-export PATH=/home/rcf-40/mengzhou/bin/rmap/bin:/home/rcf-40/mengzhou/panfs/tools/methpipe/bin:/home/rcf-40/mengzhou/bin/bedtools/bin:/home/rcf-40/mengzhou/bin:/usr/usc/R/2.13.0/bin:/usr/bin:/usr/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+echo "#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J pipe_${NAME}
+#SBATCH -e ${PWD}/%x.e%j
+#SBATCH -o ${PWD}/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=100:00:00
+#SBATCH --mem=16G
+export PATH=$PATH
 export LC_All=C
+
 WD=$PWD
 REF=/home/rcf-40/mengzhou/panfs/genome/$1
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 #set file name
 if [ $1 ]
 then
@@ -7,16 +7,15 @@ else
   FILE="general.sh"
 fi
 
-echo "#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N general_job
-#PBS -e ${PWD}
-#PBS -o ${PWD}
-#PBS -l nodes=1:ppn=1
-#PBS -l walltime=24:00:00
-#PBS -l mem=4000mb
-#PBS -l pmem=4000mb
-#PBS -l vmem=4000mb
+echo "#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J general_job
+#SBATCH -e ${PWD}/%x.e%j
+#SBATCH -o ${PWD}/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=48:00:00
+#SBATCH --mem=4G
 export PATH=$PATH
 
 WD=${PWD}

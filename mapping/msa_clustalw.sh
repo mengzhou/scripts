@@ -1,12 +1,12 @@
-#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N clustalw
-#PBS -e /home/rcf-40/mengzhou/panfs/repeats/cyclic/sim
-#PBS -o /home/rcf-40/mengzhou/panfs/repeats/cyclic/sim
-#PBS -l nodes=1:ppn=1
-#PBS -l walltime=48:00:00
-#PBS -l mem=8000mb
-#PBS -l vmem=8000mb
+#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J clustalw
+#SBATCH -e ${PWD}/%x.e%j
+#SBATCH -o ${PWD}/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=48:00:00
+#SBATCH --mem=4G
 export PATH=/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/usr/java/jdk1.5.0_13/bin:/home/rcf-40/mengzhou/bin:/home/rcf-40/mengzhou/bin/bedtools/bin:/home/rcf-40/mengzhou/bin/methpipe/bin:/home/rcf-40/mengzhou/bin/rmap/bin:/home/rcf-40/mengzhou/bin/methpipe/bin:/home/rcf-40/mengzhou/bin/amrfinder_v1.01/bin
 
 WD=$PWD

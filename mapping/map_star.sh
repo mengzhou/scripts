@@ -1,13 +1,12 @@
-#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N PROJ
-#PBS -e ProjWD
-#PBS -o ProjWD
-#PBS -l nodes=1:ppn=8
-#PBS -l walltime=24:00:00
-#PBS -l mem=48000mb
-#PBS -l pmem=6000mb
-#PBS -l vmem=48000mb
+#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J PROJ
+#SBATCH -e ProjWD/%x.e%j
+#SBATCH -o ProjWD/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=48:00:00
+#SBATCH --mem=60G
 export PATH=/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/usr/java/jdk1.5.0_13/bin:/home/rcf-40/mengzhou/bin:/home/rcf-40/mengzhou/bin/bedtools/bin:/home/rcf-40/mengzhou/bin/methpipe/bin:/home/rcf-40/mengzhou/bin/rmap/bin:/home/rcf-40/mengzhou/bin/methpipe/bin
 
 WD=ProjWD
@@ -15,7 +14,7 @@ cd $WD
 
 STAR=/home/rcf-40/mengzhou/bin/STAR/bin/Linux_x86_64/STAR
 GENOME_INDEX=/home/rcf-40/mengzhou/panfs/genome/mapping_index/star/mm10
-THREAD=8
+THREAD=16
 ADAPTER=
 
 PREFIX=${PROJ}.

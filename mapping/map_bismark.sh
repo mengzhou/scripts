@@ -22,14 +22,15 @@ if [ $# == 3 ]
 then
   # single-end
   NAME=${PWD##*/}
-  echo "#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N bism_se_${NAME#*_}
-#PBS -e ${PWD}
-#PBS -o ${PWD}
-#PBS -l nodes=1:ppn=16
-#PBS -l walltime=160:00:00
-#PBS -l mem=48000mb
+  echo "#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J bismark_se_${NAME#*_}
+#SBATCH -e ${PWD}/%x.e%j
+#SBATCH -o ${PWD}/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=200:00:00
+#SBATCH --mem=40G
 export PATH=$PATH
 
 WD=${PWD}
@@ -39,14 +40,15 @@ $BISMARK --path_to_bowtie=$BT2 --parallel 4 -p 4 $REF $2
 " > qsub_bismark_se_${NAME%.*}.sh
 else
   # pair-end
-  echo "#PBS -S /bin/bash
-#PBS -q cmb
-#PBS -N bism_pe_${NAME#*_}
-#PBS -e ${PWD}
-#PBS -o ${PWD}
-#PBS -l nodes=1:ppn=16
-#PBS -l walltime=160:00:00
-#PBS -l mem=48000mb
+  echo "#!/usr/bin/bash
+#SBATCH -p cmb
+#SBATCH -J bismark_pe_${NAME#*_}
+#SBATCH -e ${PWD}/%x.e%j
+#SBATCH -o ${PWD}/%x.o%j
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=200:00:00
+#SBATCH --mem=40G
 export PATH=$PATH
 
 WD=${PWD}

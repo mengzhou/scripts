@@ -2,7 +2,7 @@
 if [ $# == 2 ]
 then
   NAME=${1%.}
-  GENOME=$HOME/panfs/genome/coordinates/${2}.sizes
+  GENOME=/home/rcf-40/mengzhou/panfs/genome/coordinates/${2}.sizes
   METH=${NAME}.meth
   HMR=${NAME}.hmr
   PMR=${NAME}.pmr

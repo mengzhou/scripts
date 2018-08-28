@@ -3,7 +3,7 @@ for i in $(find $PWD -name "*.sra" | sort)
 do
   j=${i##*/}
   NAME=${j%.*}
-  FILE=qsub_dump_${NAME}.sh
+  FILE=slurm_dump_${NAME}.sh
 echo "#!/usr/bin/bash
 #SBATCH -p cmb
 #SBATCH -J dump_${NAME}

@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+"""Pipe a .aln file and convert it to tabular format.
+"""
 import sys
 
 def main():
@@ -6,6 +8,8 @@ def main():
   seqs = []
   index = 0
   for l in sys.stdin:
+    if l.find("*")>=0:
+      continue
     f = l.split()
     if l == "\n":
       index = 0
